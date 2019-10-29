@@ -14,20 +14,26 @@ fn main() {
 
     println!("乱数の値は:{}",secret_number);
 
-    println!("数字をにゅうりょくしてね！");
+    loop{
 
-    let mut guess = String::new();
+        println!("数字をにゅうりょくしてね！");
 
-    io::stdin().read_line(&mut guess).expect("読み込みに失敗しました");
+        let mut guess = String::new();
+
+        io::stdin().read_line(&mut guess).expect("読み込みに失敗しました");
     
-    println!("あなたの入力は{}",guess);
+        let guess: u32 = guess.trim().parse().expect("数字を入力して！");
+        
+        println!("あなたの入力は{}",guess);
 
+        match guess.cmp(&secret_number){
 
-    match guess.cmp(&secret_number){
-
-        Ordering::Less => println!("小さいよ！"),
-        Ordering::Greater => println!("大きいよ！"),
-        Ordering::Equal => println!("あたり！！！"),
-
+            Ordering::Less => println!("小さいよ！"),
+            Ordering::Greater => println!("大きいよ！"),
+            Ordering::Equal =>{
+                println!("あたり！！！");
+                break;
+            }
+        }
     }
 }
